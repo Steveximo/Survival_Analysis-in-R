@@ -2,7 +2,7 @@
 
 
 
-![](C:/Users/steven\Desktop\survival.png)
+![]("C:/Users/steven\Desktop\survival.png")
 
 WHAT IS SURVIVAL ANALYSIS ?
 

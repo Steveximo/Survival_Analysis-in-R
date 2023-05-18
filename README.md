@@ -1,5 +1,9 @@
 # Survival_Analysis-in-R
 
+
+
+![](C:/Users/steven\Desktop\survival.png)
+
 WHAT IS SURVIVAL ANALYSIS ?
 
 *Survival analysis* focuses on describing for a given individual or group of individuals, a defined point of event called ***the failure*** ( such as occurrence of a disease, cure from a disease, death, relapse after response to treatment...) that occurs after a period of time called ***failure time*** during which individuals are observed. It is usually expressed through the ***survival probability*** which is the probability that the event of interest has not occurred by a duration, t.

@@ -20,28 +20,5 @@ In short, survival data can be described as having the following three character
 
 The data set is of adjuvant chemotherapy for 888 colon cancer patients. We will focus on the study effect of treatment types on time to death. We shall visualize the data with kaplan-meier estimate of the survival function and the corresponding 95% confidence intervals. We shall fit a cox hazards proportional model, compare survival experiences and test their significance using the log rank test.You can find [here](https://www.kaggle.com/datasets/lakshmi25npathi/colon-cancer) the link to the data set.
 
-``{r setup, include=FALSE }
-colon_trt <- survfit(
-                  Surv(follow_up,status) ~
-                    trt_ype,data =colon)
-
-plot(
-  colon_trt,
-  col = colo,
-  xlab = "Time(in years) follow up",
-  ylab = "Survival probability",
-  main = "Survival curves by Treatment type",
- col.main = "blue" )
-legend(
-  "topright",
-  legend = c("lev(amisole)","lev(amisole)+5-FU"),
-  col = colo,
-  lty = 1,
-  cex = .9,
-  bty = "n"
-  )
-```
-
-
-
+![](C:\Users\steven\Desktop\PROJECTS\Flexdashboard.JPG)
 

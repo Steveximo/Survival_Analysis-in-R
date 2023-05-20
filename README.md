@@ -21,5 +21,5 @@ In short, survival data can be described as having the following three character
 The data set is of adjuvant chemotherapy for 888 colon cancer patients. We will focus on the study effect of treatment types on time to death. We shall visualize the data with kaplan-meier estimate of the survival function and the corresponding 95% confidence intervals. We shall fit a cox hazards proportional model, compare survival experiences and test their significance using the log rank test.You can find [here](https://www.kaggle.com/datasets/lakshmi25npathi/colon-cancer) the link to the data set.
 
 ```{r picture, echo = F}
-knitr::include_graphics(here("C:\Users\steven\Desktop\PROJECTS\Flexdashboard.JPG"))
+knitr::include_graphics(here("C:/Users\steven\Desktop\PROJECTS\Flexdashboard.JPG"))
 ```

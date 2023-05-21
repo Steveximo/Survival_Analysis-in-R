@@ -1,8 +1,7 @@
 # Survival_Analysis-in-R
 
 
-
-          ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHP1FCTGYwe3XnwH0RVqurzycU50EsVaf3i79asb_0tg&s)
+ ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHP1FCTGYwe3XnwH0RVqurzycU50EsVaf3i79asb_0tg&s)
 
 WHAT IS SURVIVAL ANALYSIS ?
 

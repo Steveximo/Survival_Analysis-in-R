@@ -2,7 +2,7 @@
 
 
 
-![]("C:/Users/steven\Desktop\survival.png")
+![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsphweb.bumc.bu.edu%2Fotlt%2Fmph-modules%2Fbs%2Fbs704_survival%2FBS704_Survival_print.html&psig=AOvVaw1EFrPFez3mCTV87Q595R5T&ust=1684733047166000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPjehurVhf8CFQAAAAAdAAAAABAE)
 
 WHAT IS SURVIVAL ANALYSIS ?
 
@@ -20,4 +20,3 @@ In short, survival data can be described as having the following three character
 
 The data set is of adjuvant chemotherapy for 888 colon cancer patients. We will focus on the study effect of treatment types on time to death. We shall visualize the data with kaplan-meier estimate of the survival function and the corresponding 95% confidence intervals. We shall fit a cox hazards proportional model, compare survival experiences and test their significance using the log rank test.You can find [here](https://www.kaggle.com/datasets/lakshmi25npathi/colon-cancer) the link to the data set.
 
-![Screenshot of a comment on a GitHub issue showing an image, added in the Markdown, of an Octocat smiling and raising a tentacle.](https://myoctocat.com/assets/images/base-octocat.svg)

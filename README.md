@@ -2,7 +2,7 @@
 
 
 
-![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsphweb.bumc.bu.edu%2Fotlt%2Fmph-modules%2Fbs%2Fbs704_survival%2FBS704_Survival_print.html&psig=AOvVaw1EFrPFez3mCTV87Q595R5T&ust=1684733047166000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPjehurVhf8CFQAAAAAdAAAAABAE)
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHP1FCTGYwe3XnwH0RVqurzycU50EsVaf3i79asb_0tg&s)
 
 WHAT IS SURVIVAL ANALYSIS ?
 

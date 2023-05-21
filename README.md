@@ -2,7 +2,7 @@
 
 
  ![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHP1FCTGYwe3XnwH0RVqurzycU50EsVaf3i79asb_0tg&s)
-
+![](https://www.google.com/imgres?imgurl=http%3A%2F%2Fwww.clairvoyant.ai%2Fhubfs%2Fcox.png&tbnid=X-dUueYIiNBkhM&vet=12ahUKEwiWr8Dd14X_AhUN93MBHWkzA-0QMygFegUIARD1AQ..i&imgrefurl=https%3A%2F%2Fwww.clairvoyant.ai%2Fblog%2Fcox-proportional-hazards-model-for-survival-analysis-mlmuse&docid=52qY2AdUD4t2bM&w=1200&h=627&q=survival%20analysis%20images&ved=2ahUKEwiWr8Dd14X_AhUN93MBHWkzA-0QMygFegUIARD1AQ)
 WHAT IS SURVIVAL ANALYSIS ?
 
 *Survival analysis* focuses on describing for a given individual or group of individuals, a defined point of event called ***the failure*** ( such as occurrence of a disease, cure from a disease, death, relapse after response to treatment...) that occurs after a period of time called ***failure time*** during which individuals are observed. It is usually expressed through the ***survival probability*** which is the probability that the event of interest has not occurred by a duration, t.

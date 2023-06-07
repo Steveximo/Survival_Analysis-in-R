@@ -1,0 +1,270 @@
+# Loading packages
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(
+  gt,
+  rio,
+  here,
+  dplyr,
+  ggplot2,
+  magrittr,
+  janitor,
+  survival,
+  plotrix,
+  flextable
+)
+
+
+# Importing data into R
+DF <- rio::import(here("C:/Users/steven/Desktop/PROJECTS/colon.csv"))
+
+# Data Exploration
+DF %>% 
+  select(
+    time,
+    age) %>% 
+  mutate(
+    follow_up=time/365) %>% 
+  summary()
+
+DF1 <- subset(DF,rx >= 2) 
+
+colon <- DF1 %>% 
+  select(
+    time,
+    status,
+    rx,
+    age,
+    sex) %>% 
+  mutate(
+    follow_up=time/365,  
+    event = ifelse(status==1, "death", "censored"),
+    trt_ype  = ifelse(rx==2, "amisole", "amisole+5-FU"),
+    gender = ifelse(sex == 1, "male", "female"),
+    age_cat = case_when(
+      age < 35 ~ "0 - 34",
+      age >= 35 & age < 65 ~ "35 - 64",
+      age >= 65 ~ "65+")
+  )
+
+any(is.na(colon))
+str(colon)
+
+head(colon,10)
+tabyl(colon$gender)
+tabyl(colon$trt_ype)
+tabyl(colon$age_cat)
+tabyl(colon$event)
+
+colon %>% 
+  tabyl(gender, age_cat) %>% 
+  adorn_totals(where = "both") %>% 
+  adorn_percentages() %>% 
+  adorn_pct_formatting() %>% 
+  adorn_ns(position = "front") %>% 
+  gt()
+
+colon %>% 
+  tabyl(gender, event) %>% 
+  adorn_totals(where = "both") %>% 
+  adorn_percentages() %>% 
+  adorn_pct_formatting() %>% 
+  adorn_ns(position = "front") %>% 
+  flextable()
+
+colon %>% 
+  tabyl(age_cat, event) %>% 
+  adorn_totals(where = "both") %>% 
+  adorn_percentages() %>% 
+  adorn_pct_formatting() %>% 
+  adorn_ns(position = "front") %>% 
+  gt()
+
+
+colon %>% 
+  tabyl(trt_ype, event) %>% 
+  adorn_totals(where = "both") %>% 
+  adorn_percentages() %>% 
+  adorn_pct_formatting() %>% 
+  adorn_ns(position = "front") %>% 
+  flextable()
+
+
+table1 <- table(colon$event, colon$gender)
+barplot(table1, beside = T,
+        main = "Event by gender",
+        ylab = "status number", 
+        col.main = "blue",
+        col.lab = "darkblue",
+        col = c("green","red"),
+        density = 30, 
+        angle = 45)
+legend("top",
+       legend =c("deaths","censored"),
+       density = 30,angle = 45,
+       fill = c("green","red"))
+table2 <- table(colon$event, colon$trt_ype)          
+barplot(table2,beside = T,
+        main ="Event status by Treatment type",
+        ylab = "status number",
+        col.main = "blue",
+        col.lab = "darkblue",
+        col = c("lightgreen","red") )
+legend("top",
+       legend =c("censored","deaths"),
+       bty ="n",
+       fill = c("lightgreen","red"))
+colon3 <- colon %>% 
+  select(gender, event) %>% 
+  filter(event == "death") 
+
+table3 <- table(colon3)
+piepercent <-paste0(round(100 * table3/sum(table3), 1), "%")
+
+pie3D(table3,radius = 1.5,
+      explode = 0.3,
+      labels = piepercent,
+      col = c("purple","orange"),
+      main = "Deaths by gender ",
+      col.main="blue")
+legend("topright",
+       c("female","males"), 
+       cex = 0.8,
+       fill =c("purple","orange") )
+
+survobj <- Surv(time = colon$follow_up,
+                event = colon$status)
+
+
+# Fitting Overall survival curve
+head(survobj, 10)
+fitkm <- survfit(survobj ~ 1 )
+plot(fitkm,
+     xlab = "Time (in years) of follow up",
+     ylab = "Survival probability",
+     main = "Kaplan-meier Overall survival curve ",
+     col="red"
+)
+
+
+# Compare survival between groups
+colo <- c("blue", "darkgreen")
+
+colon_gender <- survfit(Surv
+                        (follow_up,status) ~sex,
+                        data =colon)
+
+#Survival curves for male and female 
+plot(
+  colon_gender,
+  col = colo,
+  xlab = "Time(in years) of follow up",
+  ylab = "Survival probability",
+  main = "Survival curves by gender"
+)
+legend(
+  "topright",
+  legend = c("female", "male"),
+  col = colo,
+  lty = 1,
+  cex = .9,
+  bty = "n"
+)
+
+#Test for difference in survival by gender
+coxfit_gender <- coxph(Surv
+                       (follow_up,status)~gender,data=colon)
+summary(coxfit_gender)
+
+survdiff(Surv
+         (follow_up,status) ~ gender,data = colon)
+
+# Survival curves for  two treatment types 
+colon_trt <- survfit(
+  Surv(follow_up,status) ~
+    trt_ype,data =colon)
+
+plot(
+  colon_trt,
+  col = colo,
+  xlab = "Time(in years) of follow up",
+  ylab = "Survival probability",
+  main = "Survival curves by Treatment type")
+legend(
+  "topright",
+  legend = c("lev(amisole)","lev(amisole)+5-FU"),
+  col = colo,
+  lty = 1,
+  cex = .9,
+  bty = "n"
+)
+
+#Test for difference in survival between treatments
+coxfit_trt <- coxph(
+  Surv(follow_up,status)~trt_ype,
+  data=colon)
+summary(coxfit_trt)
+survdiff(Surv
+         (follow_up,status) ~ trt_ype,data = colon)
+
+#Survival curves for age categories 
+colon_age_cat <- survfit(
+  Surv(follow_up,status)~age_cat,data=colon)
+col_age <- c("blue", "darkgreen", "red")
+
+plot(
+  colon_age_cat,
+  col = col_age,
+  xlab = "Time(in years)of years of follow up",
+  ylab = "Survival probability",
+  main = "Survival curves by Age category")
+legend(
+  "topright",
+  legend = c("65+","35-64","0-34"),
+  col = col_age,
+  lty = 1,
+  cex = .9,
+  bty = "n"
+)
+
+#Test for difference in survival in age categories
+coxfit_age_cat <- coxph(
+  Surv(follow_up,status) ~ age_cat,
+  data=colon)
+summary(coxfit_age_cat)
+survdiff(
+  Surv(follow_up,status) ~ age_cat,data = colon)
+
+
+colon_cox_sexagecat <- coxph(
+  Surv(follow_up,status) ~
+    gender + age_cat, 
+  data = colon
+)
+
+colon_cox_sexagecat
+test.colon_cox_sexagecat <-cox.zph(colon_cox_sexagecat)
+test.colon_cox_sexagecat 
+
+colon_cox_sextrt <- coxph(
+  Surv(follow_up,status) ~
+    gender + trt_ype, 
+  data = colon
+)
+
+colon_cox_sextrt
+test_colon_coxsextrt <- cox.zph(colon_cox_sextrt)
+test_colon_coxsextrt
+
+
+#fit the model
+colon_surv_cox <-  coxph(
+  Surv(follow_up, status) ~  
+    gender + age + trt_ype,
+  data = colon
+)
+summary(colon_surv_cox)
+
+#test the proportional hazard model
+colon_surv_cox_ph_test <- cox.zph(colon_surv_cox)
+colon_surv_cox_ph_test
+
